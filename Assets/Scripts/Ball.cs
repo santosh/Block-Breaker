@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
-    public Paddle paddle;
-
+    private Paddle paddle;
     private bool hasStarted = false;
     private Vector3 paddleToBallVector;
     private Rigidbody2D ballRigidbody;
 
     // Use this for initialization
     void Start () {
+        paddle = GameObject.FindObjectOfType<Paddle>();
         ballRigidbody = GetComponent<Rigidbody2D>();
         paddleToBallVector = this.transform.position - paddle.transform.position;
     }
@@ -25,8 +25,9 @@ public class Ball : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 Debug.Log("Launching ball.");
                 hasStarted = true;
-                ballRigidbody.velocity = new Vector2(2f, 10f);
+                ballRigidbody.velocity = new Vector2(2f, 15f);
             }
         }
     }
+    void FixedUpdate(){ Debug.Log("Ball velocity: " + ballRigidbody.velocity.magnitude); }
 }
